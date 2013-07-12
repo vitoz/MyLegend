@@ -1,0 +1,23 @@
+﻿生成启动时间为 2013/7/12 17:49:24。
+     1>项目“D:\project\cocos2dx\legend\proj.win32\legend.win32.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /I..\Classes /ID:\project\cocos2dx\cocos2dx /ID:\project\cocos2dx\cocos2dx\include /ID:\project\cocos2dx\cocos2dx\kazmath\include /ID:\project\cocos2dx\cocos2dx\platform\win32 /ID:\project\cocos2dx\cocos2dx\platform\third_party\win32 /ID:\project\cocos2dx\cocos2dx\platform\third_party\win32\OGLES /ID:\project\cocos2dx\CocosDenshion\include /ID:\project\cocos2dx\scripting\lua\cocos2dx_support /ID:\project\cocos2dx\scripting\lua\tolua /ID:\project\cocos2dx\scripting\lua\lua /I..\src /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc110.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\src\MapLayer.cpp
+         MapLayer.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\project\cocos2dx\Debug.win32\legend.win32.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\project\cocos2dx\Debug.win32\ libcocos2d.lib opengl32.lib glew32.lib libCocosDenshion.lib liblua.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\project\cocos2dx\Debug.win32\legend.win32.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\project\cocos2dx\Debug.win32\legend.win32.lib" /MACHINE:X86 Debug.win32\legend.res
+         Debug.win32\AppDelegate.obj
+         Debug.win32\CCLuaEngine.obj
+         Debug.win32\Cocos2dxLuaLoader.obj
+         Debug.win32\LuaCocos2d.obj
+         Debug.win32\tolua_fix.obj
+         Debug.win32\MapLayer.obj
+         Debug.win32\TileLayer.obj
+         Debug.win32\TileSprite.obj
+         Debug.win32\Util.obj
+         Debug.win32\main.obj
+         legend.win32.vcxproj -> D:\project\cocos2dx\Debug.win32\legend.win32.exe
+     1>已完成生成项目“D:\project\cocos2dx\legend\proj.win32\legend.win32.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:03.36

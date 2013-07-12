@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ori">
+      <UniqueIdentifier>{234ffb97-a35a-42ad-8f74-3ed6e78de715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ori\include">
+      <UniqueIdentifier>{3beae11e-6bde-48df-b3a2-190531bb805f}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="ori\resource">
+      <UniqueIdentifier>{9a1536e1-7fbf-4f84-bdd1-11333218601e}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;png;manifest</Extensions>
+    </Filter>
+    <Filter Include="ori\source">
+      <UniqueIdentifier>{bdf58195-91aa-41a6-b82d-bc0372d07939}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4571c121-7377-4766-a39a-2e309275b378}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\legend.ico">
+      <Filter>ori\resource</Filter>
+    </Image>
+    <Image Include="..\Resources\Default.png">
+      <Filter>ori\resource</Filter>
+    </Image>
+    <Image Include="..\Resources\crop.png">
+      <Filter>ori\resource</Filter>
+    </Image>
+    <Image Include="..\Resources\farm.jpg">
+      <Filter>ori\resource</Filter>
+    </Image>
+    <Image Include="..\Resources\land.png">
+      <Filter>ori\resource</Filter>
+    </Image>
+    <Image Include="..\Resources\menu2.png">
+      <Filter>ori\resource</Filter>
+    </Image>
+    <Image Include="..\Resources\Icon.png">
+      <Filter>ori\resource</Filter>
+    </Image>
+    <Image Include="..\Resources\dog.png">
+      <Filter>ori\resource</Filter>
+    </Image>
+    <Image Include="..\Resources\menu1.png">
+      <Filter>ori\resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="legend.rc">
+      <Filter>ori\resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>ori\include</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>ori\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>ori\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\cocos2dx_support\LuaCocos2d.h">
+      <Filter>ori\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\cocos2dx_support\CCLuaEngine.h">
+      <Filter>ori\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\cocos2dx_support\Cocos2dxLuaLoader.h">
+      <Filter>ori\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\cocos2dx_support\tolua_fix.h">
+      <Filter>ori\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MapLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Util.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TileLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TileSprite.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>ori\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>ori\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\cocos2dx_support\LuaCocos2d.cpp">
+      <Filter>ori\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\cocos2dx_support\CCLuaEngine.cpp">
+      <Filter>ori\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\cocos2dx_support\Cocos2dxLuaLoader.cpp">
+      <Filter>ori\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\cocos2dx_support\tolua_fix.c">
+      <Filter>ori\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MapLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Util.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TileSprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TileLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\hello.lua">
+      <Filter>ori</Filter>
+    </None>
+    <None Include="..\Resources\hello2.lua">
+      <Filter>ori</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\Resources\effect1.wav">
+      <Filter>ori</Filter>
+    </Media>
+    <Media Include="..\Resources\background.mp3">
+      <Filter>ori</Filter>
+    </Media>
+  </ItemGroup>
+</Project>
