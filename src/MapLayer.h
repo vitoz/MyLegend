@@ -3,15 +3,29 @@
 #include <string>
 #include "cocos2d.h"
 
+class TileLayer;
+
+typedef struct BlockFlag_st
+{
+  bool moveable:1;
+  bool door:1;
+}BlockFlag_t;
+
 class MapLayer : public cocos2d::CCLayer
 {
 public:
-  bool init(std::string path);
+  bool load(const char * path);
   void MapLayer::moveCallback(CCObject *pSender);
 
 private:
   int m_width;
   int m_height;
+  BlockFlag_t *m_blockFlag;
+  TileLayer *m_objectLayer;
+  TileLayer *m_tileLayer;
+  TileLayer *m_stileLayer;
+
+  bool loadMapFile(const char *path);
 
 };
 

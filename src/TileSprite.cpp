@@ -9,7 +9,7 @@ using namespace cocos2d;
 TileSprite::TileSprite(const string tilePath)
 {
   m_tilePath = tilePath;
-  init();
+  CCSprite::CCSprite();
 }
 
 void TileSprite::loadTexture()

@@ -9,8 +9,13 @@ TileLayer::TileLayer( int width, int height )
 {
   m_width = width;
   m_height = height;
+
   m_pTileSprites = new TileSprite *[width * height];
   CHECK_NEW_MEMORY(m_pTileSprites);
+  for(int i = 0; i < width * height; i++)
+  {
+    m_pTileSprites[i] = NULL;
+  }
 }
 
 void TileLayer::setTile( int x, int y, const string path )
@@ -32,4 +37,18 @@ void TileLayer::loadTile( int x, int y )
   m_pTileSprites[y * m_width + x]->loadTexture();
   m_pTileSprites[y * m_width + x]->setPosition(CCPoint(x * 48, y * 32));
   this->addChild(m_pTileSprites[y * m_width + x]);
+}
+
+TileSprite * TileLayer::getTile( int x, int y )
+{
+  return m_pTileSprites[y * m_width + x];
+}
+
+void TileLayer::removeTile( int x, int y )
+{
+  if(m_pTileSprites[y * m_width + x] != NULL)
+  {
+    delete m_pTileSprites[y * m_width + x];
+  }
+  m_pTileSprites[y * m_width + x] = NULL;
 }

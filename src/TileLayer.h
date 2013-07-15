@@ -3,16 +3,18 @@
 #include <string>
 #include "cocos2d.h"
 
-class TileSprite;
-
 using std::string;
+
+class TileSprite;
 
 class TileLayer : public cocos2d::CCLayer
 {
 public:
   TileLayer(int width, int height);
   void setTile(int x, int y, const string path);
+  TileSprite *getTile(int x, int y);
   void clearTile(int x, int y);
+  void removeTile(int x, int y);
   void loadTile(int x, int y);
   
 private:

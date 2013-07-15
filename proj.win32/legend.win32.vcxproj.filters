@@ -88,6 +88,15 @@
     <ClInclude Include="..\src\TileSprite.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameScence.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IKeyEvent.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\VFile.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -118,6 +127,15 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\TileLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScence.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\IKeyEvent.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\VFile.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

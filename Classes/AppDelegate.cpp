@@ -4,10 +4,14 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "MapLayer.h"
+#include "GameScence.h"
+
+const int KEY_PRESS = 256;
+const int KEY_RELEASE = 257;
 
 using namespace CocosDenshion;
 
-USING_NS_CC;
+USING_NS_CC;  
 
 AppDelegate::AppDelegate()
 {
@@ -18,22 +22,48 @@ AppDelegate::~AppDelegate()
     SimpleAudioEngine::end();
 }
 
+void Win32KeyHook( UINT message,WPARAM wParam, LPARAM lParam )
+{
+  CCLog("Win32KeyHook message %d wParam %d lParam %d", message, wParam, lParam);
+
+  GameScence *pScence = GameScence::current();
+  if(pScence == NULL)
+  {
+    return;
+  }
+
+  if(message == KEY_PRESS)
+  {
+    pScence->onKeyPressEvent(static_cast<int>(wParam));
+  }
+  else if(message == KEY_RELEASE)
+  {
+    pScence->onKeyReleaseEvent(static_cast<int>(wParam));
+  }
+}
+
 bool AppDelegate::applicationDidFinishLaunching()
 {
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
 
+    // set Win32 Key Hook
+    CCEGLView::sharedOpenGLView()->setAccelerometerKeyHook(Win32KeyHook);
+
     // turn on display FPS
     pDirector->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
-    CCScene *psence = new CCScene();
+
     MapLayer *layer = new MapLayer();
-    psence->addChild(layer);
-    layer->init("");
-    pDirector->runWithScene(psence);
+    layer->load("");
+    GameScence *pScence = GameScence::create("a.bmp");
+    pScence->addChild(layer);
+    GameScence::firstSetCurrentScence(pScence);
+    //pDirector->runWithScene(GameScence::current());
+
 
     // register lua engine
     //CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();

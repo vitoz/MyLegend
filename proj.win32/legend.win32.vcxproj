@@ -138,10 +138,13 @@
     <ClInclude Include="..\Classes\cocos2dx_support\Cocos2dxLuaLoader.h" />
     <ClInclude Include="..\Classes\cocos2dx_support\LuaCocos2d.h" />
     <ClInclude Include="..\Classes\cocos2dx_support\tolua_fix.h" />
+    <ClInclude Include="..\src\GameScence.h" />
+    <ClInclude Include="..\src\IKeyEvent.h" />
     <ClInclude Include="..\src\MapLayer.h" />
     <ClInclude Include="..\src\TileLayer.h" />
     <ClInclude Include="..\src\TileSprite.h" />
     <ClInclude Include="..\src\Util.h" />
+    <ClInclude Include="..\src\VFile.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -151,10 +154,13 @@
     <ClCompile Include="..\Classes\cocos2dx_support\Cocos2dxLuaLoader.cpp" />
     <ClCompile Include="..\Classes\cocos2dx_support\LuaCocos2d.cpp" />
     <ClCompile Include="..\Classes\cocos2dx_support\tolua_fix.c" />
+    <ClCompile Include="..\src\GameScence.cpp" />
+    <ClCompile Include="..\src\IKeyEvent.cpp" />
     <ClCompile Include="..\src\MapLayer.cpp" />
     <ClCompile Include="..\src\TileLayer.cpp" />
     <ClCompile Include="..\src\TileSprite.cpp" />
     <ClCompile Include="..\src\Util.cpp" />
+    <ClCompile Include="..\src\VFile.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
