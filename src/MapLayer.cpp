@@ -21,6 +21,7 @@ bool MapLayer::load(const char * path)
   //     }
   //     this->addChild(player);
   //     return false;
+  setPosition(-4800 , -3200);
 
   WCHAR aaa[255];
   GetModuleFileName(NULL, aaa, 255);
@@ -28,21 +29,11 @@ bool MapLayer::load(const char * path)
 
   if(loadMapFile(path))
   {
-    for(int i = 0; i <10; i++)
-    {
-      for(int j = 0; j < 10; j++)
-      {
-        m_tileLayer->loadTile(i, j);
-        m_stileLayer->loadTile(i, j);
-        m_objectLayer->loadTile(i, j);
-      }
-    }
-
     addChild(m_tileLayer);
     addChild(m_stileLayer);
     addChild(m_objectLayer);
 
-    Util::backDealing(this, MapLayer::backDealTilesData);
+    //Util::backDealing(this, MapLayer::backDealTilesData);
     return true;
   }
   return false;
@@ -162,7 +153,7 @@ void MapLayer::update( cocos2d::CCTime dt )
 {
   CCPoint pos = getPosition();
   int x = pos.x / 48;
-  int y = pos.y /32;
+  int y = pos.y / 32;
 
   x = -x;
   y = -y;
@@ -181,7 +172,7 @@ void MapLayer::update( cocos2d::CCTime dt )
   {
     for(int j = y1 - 1; j < y2 + 1; j++)
     {
-      if(i < x1 || i > x2 || y < y1 || y > y2)
+      if(i < x1 || i >= x2 || j < y1 || j >= y2)
       {
         m_tileLayer->clearTile(i, j);
         m_stileLayer->clearTile(i, j);

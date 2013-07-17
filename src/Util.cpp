@@ -67,7 +67,7 @@ unsigned char *Util::loadImageData(const char *path, int *pwidth, int *pheight)
   fp = fopen(path, "rb");
   if(fp == NULL)
   {
-    LOG("fopen() File don't exist.%s\n", path);
+    //LOG("fopen() File don't exist.%s\n", path);
     return NULL;
   }
 

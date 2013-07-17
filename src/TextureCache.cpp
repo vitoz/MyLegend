@@ -21,7 +21,7 @@ void TextureCache::retain( std::string str )
 {
   TextureCacheItem_t *pitem = getItem(str);
   assert(pitem != NULL);
-  pitem->refCount++;
+  pitem->refCount++; 
 }
 
 void TextureCache::release( std::string str )
@@ -32,11 +32,13 @@ void TextureCache::release( std::string str )
   if(pitem->refCount == 0)
   {
     delete pitem->pTexture;
+    m_texMaps.erase(m_texMaps.find(str));
   }
 }
 
 void TextureCache::set( std::string str, cocos2d::CCTexture2D *pTexture )
 {
+  CCLOG("cachesize:%d\n", m_texMaps.size());
   TextureCacheItem_t item;
   item.refCount = 0;
   item.pTexture = pTexture;
