@@ -3,7 +3,10 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <pthread.h>
+#include <vector>
 
+using std::vector;
 
 struct RGBA 
 {
@@ -43,10 +46,23 @@ struct Bmp24Data
   unsigned char colorData[1];   
 };
 
-cocos2d::CCTexture2D *Util::getCCTexture2D(const char *path)
+Util Util::m_instance;
+vector<pthread_t> Util::m_threads;
+
+Util::~Util()
+{
+  Util::cleanup();
+}
+
+Util::Util()
+{
+
+}
+
+unsigned char *Util::loadImageData(const char *path, int *pwidth, int *pheight)
 {
   assert(path != NULL);
-  
+
   FILE *fp;
   fp = fopen(path, "rb");
   if(fp == NULL)
@@ -96,76 +112,70 @@ cocos2d::CCTexture2D *Util::getCCTexture2D(const char *path)
 
   switch(bmp->bitsPerPixel[0])
   {
-    case 8:
+  case 8:
+    {
+      Bmp8Data *bmp8 = (Bmp8Data*)bmp;
+      int alignLineSize;
+      alignLineSize = ((width % 4) > 0) ? \
+        width + (4 - width % 4) : width;
+      for(int i = 0; i < height; i++)
       {
-        Bmp8Data *bmp8 = (Bmp8Data*)bmp;
-        int alignLineSize;
-        alignLineSize = ((width % 4) > 0) ? \
-                        width + (4 - width % 4) : width;
-        for(int i = 0; i < height; i++)
+        for(int j = 0; j < width; j++)
         {
-          for(int j = 0; j < width; j++)
-          {
-            int pos = i * width + j;
-            int colorIndex = bmp8->colorIndexes[i * alignLineSize + j];
-            imageData[pos].r = bmp8->colorTable[colorIndex].b;
-            imageData[pos].g = bmp8->colorTable[colorIndex].g;
-            imageData[pos].b = bmp8->colorTable[colorIndex].r;
-            imageData[pos].a = 0xff;
+          int pos = i * width + j;
+          int colorIndex = bmp8->colorIndexes[i * alignLineSize + j];
+          imageData[pos].r = bmp8->colorTable[colorIndex].b;
+          imageData[pos].g = bmp8->colorTable[colorIndex].g;
+          imageData[pos].b = bmp8->colorTable[colorIndex].r;
+          imageData[pos].a = 0xff;
 
-            if((imageData[pos].r == 0) 
+          if((imageData[pos].r == 0) 
             && imageData[pos].g == 0 
             && imageData[pos].b == 0)
-            {
-              imageData[pos].a = 0;
-            }
-
-          }
-        }
-      }
-      break;
-    case 24:
-      {
-        Bmp24Data *bmp24= (Bmp24Data *)bmp;
-        int alignLineSize;
-        int lineSize = width * 3;
-        alignLineSize = ((lineSize % 4) > 0) ? \
-                        lineSize + (4 - lineSize % 4) : lineSize;
-        for(int i = 0; i < height; i++)
-        {
-          for(int j = 0; j < width; j++)
           {
-            int pos = (height - 1 - i) * width + j;
-            int colorIndex = i * alignLineSize + j;
-            imageData[pos].r = bmp24->colorData[alignLineSize * i + j * 3 + 2];
-            imageData[pos].g = bmp24->colorData[alignLineSize * i + j * 3 + 1];
-            imageData[pos].b = bmp24->colorData[alignLineSize * i + j * 3];
-            imageData[pos].a = 0xff;
-            if(colorIndex == 0)
-            {
-              imageData[pos].a = 0;
-            }
+            imageData[pos].a = 0;
+          }
+
+        }
+      }
+    }
+    break;
+  case 24:
+    {
+      Bmp24Data *bmp24= (Bmp24Data *)bmp;
+      int alignLineSize;
+      int lineSize = width * 3;
+      alignLineSize = ((lineSize % 4) > 0) ? \
+        lineSize + (4 - lineSize % 4) : lineSize;
+      for(int i = 0; i < height; i++)
+      {
+        for(int j = 0; j < width; j++)
+        {
+          int pos = (height - 1 - i) * width + j;
+          int colorIndex = i * alignLineSize + j;
+          imageData[pos].r = bmp24->colorData[alignLineSize * i + j * 3 + 2];
+          imageData[pos].g = bmp24->colorData[alignLineSize * i + j * 3 + 1];
+          imageData[pos].b = bmp24->colorData[alignLineSize * i + j * 3];
+          imageData[pos].a = 0xff;
+          if(colorIndex == 0)
+          {
+            imageData[pos].a = 0;
           }
         }
       }
-      break;
-    default:
-      LOG("error file type.\n");
-      goto type_error;
-      break;
+    }
+    break;
+  default:
+    LOG("error file type.\n");
+    goto type_error;
+    break;
   }
   free(bmp);
   fclose(fp);
 
-  using namespace cocos2d;
-  CCImage *pImage = new CCImage();
-  pImage->initWithImageData(imageData, size, CCImage::kFmtRawData, width, height, 8);
-  CCTexture2D *ptexture = new CCTexture2D();
-  ptexture->initWithImage(pImage);
-
-  delete pImage;
-  free(imageData);
-  return ptexture;
+  *pwidth = width;
+  *pheight = height;
+  return (unsigned char *)imageData;
 
 type_error:
   free(imageData);
@@ -176,4 +186,22 @@ bmp_malloc_err:
   return NULL;
 }
 
+void Util::backDealing(void *value, void *(*func)(void *))
+{
+  pthread_t pid;
+  if(pthread_create(&pid, NULL, func, value) < 0)
+  {
+    LOG("Thread Create fail.");
+    return;
+  }
+  m_threads.push_back(pid);
+}
 
+void Util::cleanup()
+{
+  for(vector<pthread_t>::iterator it = m_threads.begin(); it != m_threads.end(); it++)
+  {
+    pthread_cancel(*it);
+    pthread_join(*it, NULL);
+  }
+}

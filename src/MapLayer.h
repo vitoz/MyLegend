@@ -15,7 +15,8 @@ class MapLayer : public cocos2d::CCLayer
 {
 public:
   bool load(const char * path);
-  void MapLayer::moveCallback(CCObject *pSender);
+  void moveCallback(CCObject *pSender);
+  void update(cocos2d::CCTime dt);
 
 private:
   int m_width;
@@ -26,6 +27,12 @@ private:
   TileLayer *m_stileLayer;
 
   bool loadMapFile(const char *path);
+
+  //////////////////////////////////////////////////////////////////////////
+  ///static
+  //////////////////////////////////////////////////////////////////////////
+public:
+  static void *backDealTilesData(void *p);
 
 };
 

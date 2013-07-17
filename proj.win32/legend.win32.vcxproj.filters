@@ -85,16 +85,19 @@
     <ClInclude Include="..\src\TileLayer.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\TileSprite.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GameScence.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\IKeyEvent.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\VFile.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlayingScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameSprite.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TextureCache.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
@@ -123,19 +126,22 @@
     <ClCompile Include="..\src\Util.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\TileSprite.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\TileLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameScence.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\IKeyEvent.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\VFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlayingScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameSprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TextureCache.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

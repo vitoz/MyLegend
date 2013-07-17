@@ -65,7 +65,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libCocosDenshion.lib;liblua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>pthreadVCE2.lib;libcocos2d.lib;opengl32.lib;glew32.lib;libCocosDenshion.lib;liblua.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -138,11 +138,12 @@
     <ClInclude Include="..\Classes\cocos2dx_support\Cocos2dxLuaLoader.h" />
     <ClInclude Include="..\Classes\cocos2dx_support\LuaCocos2d.h" />
     <ClInclude Include="..\Classes\cocos2dx_support\tolua_fix.h" />
-    <ClInclude Include="..\src\GameScence.h" />
-    <ClInclude Include="..\src\IKeyEvent.h" />
+    <ClInclude Include="..\src\GameScene.h" />
+    <ClInclude Include="..\src\GameSprite.h" />
     <ClInclude Include="..\src\MapLayer.h" />
+    <ClInclude Include="..\src\PlayingScene.h" />
+    <ClInclude Include="..\src\TextureCache.h" />
     <ClInclude Include="..\src\TileLayer.h" />
-    <ClInclude Include="..\src\TileSprite.h" />
     <ClInclude Include="..\src\Util.h" />
     <ClInclude Include="..\src\VFile.h" />
     <ClInclude Include="main.h" />
@@ -154,11 +155,12 @@
     <ClCompile Include="..\Classes\cocos2dx_support\Cocos2dxLuaLoader.cpp" />
     <ClCompile Include="..\Classes\cocos2dx_support\LuaCocos2d.cpp" />
     <ClCompile Include="..\Classes\cocos2dx_support\tolua_fix.c" />
-    <ClCompile Include="..\src\GameScence.cpp" />
-    <ClCompile Include="..\src\IKeyEvent.cpp" />
+    <ClCompile Include="..\src\GameScene.cpp" />
+    <ClCompile Include="..\src\GameSprite.cpp" />
     <ClCompile Include="..\src\MapLayer.cpp" />
+    <ClCompile Include="..\src\PlayingScene.cpp" />
+    <ClCompile Include="..\src\TextureCache.cpp" />
     <ClCompile Include="..\src\TileLayer.cpp" />
-    <ClCompile Include="..\src\TileSprite.cpp" />
     <ClCompile Include="..\src\Util.cpp" />
     <ClCompile Include="..\src\VFile.cpp" />
     <ClCompile Include="main.cpp" />
