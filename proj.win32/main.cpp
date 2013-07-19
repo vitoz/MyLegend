@@ -1,8 +1,11 @@
 #include "main.h"
+#include <vld.h>
 #include "AppDelegate.h"
 #include "CCEGLView.h"
 
 USING_NS_CC;
+
+
 
 // uncomment below line, open debug console
 // #define USE_WIN32_CONSOLE
@@ -12,6 +15,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                        LPTSTR    lpCmdLine,
                        int       nCmdShow)
 {
+  _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF|_CRTDBG_LEAK_CHECK_DF);
+
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Util.h"
 
 #include <assert.h>
@@ -199,9 +198,9 @@ void Util::backDealing(void *value, void *(*func)(void *))
 
 void Util::cleanup()
 {
-  for(vector<pthread_t>::iterator it = m_threads.begin(); it != m_threads.end(); it++)
-  {
-    pthread_cancel(*it);
-    pthread_join(*it, NULL);
-  }
+//   for(vector<pthread_t >::iterator it = m_threads.begin(); it != m_threads.end(); it++)
+//   {
+//     pthread_cancel(*it);
+//     pthread_join(*it, NULL);
+//   }
 }

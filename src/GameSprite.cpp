@@ -7,43 +7,33 @@ using std::string;
 using namespace cocos2d;
 
 GameSprite::GameSprite(const string path, const CCPoint &pos)
-  :m_rawData(NULL),
-  m_path(path),
+  :m_path(path),
   m_pos(pos)
 {
 
 }
 
-void GameSprite::loadData()
-{
-  assert(m_path != "");
-  if(m_rawData == NULL && TextureCache::get(m_path) == NULL)
-  {
-    m_rawData = Util::loadImageData(m_path.c_str(), &m_width, &m_height);
-  }
-}
-
 bool GameSprite::loadTexture()
 {
-  CCTexture2D *pTexture = NULL;
-
-  loadData();
-
-  if(m_rawData != NULL)
+  if(m_pobTexture != NULL)
   {
-    pTexture = new CCTexture2D();
-    //    CCImage image;
-    //     image.initWithImageData(m_rawData, 4 * m_width * m_height, CCImage::kFmtRawData, m_width, m_height, 8);
-    //     pTexture->initWithImage(&image);
-    CCSize size;
-    size.setSize(m_width, m_height);
-    pTexture->initWithData(m_rawData, kCCTexture2DPixelFormat_RGBA8888, m_width, m_height, size);
-    delete m_rawData;
-    TextureCache::set(m_path, pTexture);
-    m_rawData = NULL;
+    return true;
   }
 
-  pTexture = TextureCache::get(m_path);
+  CCTexture2D *pTexture = TextureCache::get(m_path);
+  if(pTexture == NULL)
+  {
+    int width, height;
+    unsigned char *rawData = Util::loadImageData(m_path.c_str(), &width, &height);
+    if(rawData != NULL)
+    {
+      pTexture = new CCTexture2D();
+      pTexture->initWithData(rawData, kCCTexture2DPixelFormat_RGBA8888, width, height, CCSize(width, height));
+      delete rawData;
+      TextureCache::set(m_path, pTexture);
+    }
+  }
+
   if(pTexture)
   {
     TextureCache::retain(m_path);
@@ -57,7 +47,15 @@ bool GameSprite::loadTexture()
 
 void GameSprite::cleanup()
 {
-  CCSprite::cleanup();
+  if(m_pobTexture != NULL)
+  {
+    CCSprite::cleanup();
+    TextureCache::release(m_path);
+  }
   m_pobTexture = NULL;
-  TextureCache::release(m_path);
+}
+
+GameSprite::~GameSprite()
+{
+  cleanup();
 }

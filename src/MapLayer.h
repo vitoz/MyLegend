@@ -14,9 +14,11 @@ typedef struct BlockFlag_st
 class MapLayer : public cocos2d::CCLayer
 {
 public:
+  ~MapLayer();
   bool load(const char * path);
   void moveCallback(CCObject *pSender);
   void update(cocos2d::CCTime dt);
+  void cleanup();
 
 private:
   int m_width;

@@ -8,7 +8,9 @@
 
 USING_NS_CC;
 
-const char *MAP_PIC_PATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic";
+const char *TILE_ROOTPATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic\\tiles";
+const char *STILE_ROOTPATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic\\tiles";
+const char *OBJECT_ROOTPATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic\\tiles";
 
 bool MapLayer::load(const char * path)
 {
@@ -21,19 +23,16 @@ bool MapLayer::load(const char * path)
   //     }
   //     this->addChild(player);
   //     return false;
-  setPosition(-4800 , -3200);
 
-  WCHAR aaa[255];
-  GetModuleFileName(NULL, aaa, 255);
-  CCLOG("path:%s\n", aaa);
+  int *p = new int[0x19000000];
+
+  setPosition(-4800 , -3200);
 
   if(loadMapFile(path))
   {
     addChild(m_tileLayer);
     addChild(m_stileLayer);
     addChild(m_objectLayer);
-
-    //Util::backDealing(this, MapLayer::backDealTilesData);
     return true;
   }
   return false;
@@ -59,11 +58,11 @@ bool MapLayer::loadMapFile( const char *path )
 
   m_blockFlag = new BlockFlag_t[width * height];
   CHECK_NEW_MEMORY(m_blockFlag);
-  m_tileLayer = new TileLayer(width, height);
+  m_tileLayer = new TileLayer(width, height, TILE_ROOTPATH);
   CHECK_NEW_MEMORY(m_tileLayer);
-  m_stileLayer = new TileLayer(width, height);
+  m_stileLayer = new TileLayer(width, height, STILE_ROOTPATH);
   CHECK_NEW_MEMORY(m_stileLayer);
-  m_objectLayer = new TileLayer(width, height);
+  m_objectLayer = new TileLayer(width, height, OBJECT_ROOTPATH);
   CHECK_NEW_MEMORY(m_objectLayer);
 
   for (int i = 0; i < width * height; i++)
@@ -94,27 +93,23 @@ bool MapLayer::loadMapFile( const char *path )
       objectNo = -1;
     }
 
-    char path[512];
     int x, y;
     x = i / height;
     y = i % height;
 
     if(tileNo >= 0)
     {
-      sprintf(path, "%s\\tiles\\%06d.bmp", MAP_PIC_PATH, tileNo);
-      m_tileLayer->setTile(x, y, path);
+      m_tileLayer->setTile(x, y, tileNo);
     }
 
     if(stileNo >= 0)
     {
-      sprintf(path, "%s\\stiles\\%06d.bmp", MAP_PIC_PATH, stileNo);
-      m_stileLayer->setTile(x, y, path);
+      m_stileLayer->setTile(x, y, stileNo);
     }
 
     if(objectNo >= 0)
     {
-      sprintf(path, "%s\\object%d\\%06d.bmp", MAP_PIC_PATH, objectClassNo, objectNo);
-      m_objectLayer->setTile(x, y, path);
+      m_objectLayer->setTile(x, y, (objectClassNo << 24) | objectNo);
     }
   }
 
@@ -188,38 +183,30 @@ void MapLayer::update( cocos2d::CCTime dt )
   }
 }
 
-void * MapLayer::backDealTilesData(void *p)
+MapLayer::~MapLayer()
 {
-  MapLayer *pMapLayer = static_cast<MapLayer *>(p);
-  while(1)
+  cleanup();
+}
+
+void MapLayer::cleanup()
+{
+  //±ÜÃâÖØ¸´cleanup
+  if(m_tileLayer == NULL)
   {
-    Sleep(200);
-    CCPoint pos = pMapLayer->getPosition();
-    int x = pos.x / 48;
-    int y = pos.y /32;
-
-    x = -x;
-    y = -y;
-
-    int x1, x2, y1, y2;
-
-    x1 = x - 20;
-    x2 = x + 20;
-    y1 = y - 20;
-    y2 = y + 20;
-
-    CHECK_ZERO(x1);
-    CHECK_ZERO(y1);
-
-    for(int i = x1; i < x2; i++)
-    {
-      for(int j = y1; j < y2; j++)
-      {
-        pMapLayer->m_tileLayer->loadTileData(i, j);
-        pMapLayer->m_stileLayer->loadTileData(i, j);
-        pMapLayer->m_objectLayer->loadTileData(i, j);
-      }
-    }
+    return;
   }
-  return NULL;
+
+  CCLayer::cleanup();
+
+  removeChild(m_tileLayer);
+  removeChild(m_stileLayer);
+  removeChild(m_objectLayer);
+  delete m_tileLayer;
+  m_tileLayer = NULL;
+  delete m_stileLayer;
+  m_stileLayer = NULL;
+  delete m_objectLayer;
+  m_objectLayer = NULL;
+  delete [] m_blockFlag;
+  m_blockFlag = NULL;
 }

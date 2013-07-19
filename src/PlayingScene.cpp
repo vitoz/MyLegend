@@ -44,3 +44,19 @@ void PlayingScene::onKeyReleaseEvent( int key )
 {
 
 }
+
+void PlayingScene::cleanup()
+{
+  if(m_pMapLayer == NULL)
+  {
+    return;
+  }
+  removeChild(m_pMapLayer);
+  delete m_pMapLayer;
+  m_pMapLayer = NULL;
+}
+
+PlayingScene::~PlayingScene()
+{
+  cleanup();
+}

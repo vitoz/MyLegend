@@ -8,6 +8,8 @@ class MapLayer;
 class PlayingScene : public GameScene
 {
 public:
+  ~PlayingScene();
+  void cleanup();
   bool load(const char *path);
   void update(cocos2d::CCTime dt);
   
