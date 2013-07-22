@@ -22,9 +22,9 @@ protected:
   std::string m_rootPath;
 
 private:
-  int *m_tilesNo;
   int m_width;
   int m_height;
+  int *m_tilesNo;
   GameSprite **m_pTileSprites;
 };
 

@@ -6,9 +6,9 @@
 using std::string;
 using namespace cocos2d;
 
-GameSprite::GameSprite(const string path, const CCPoint &pos)
-  :m_path(path),
-  m_pos(pos)
+GameSprite::GameSprite(const string path)
+  :m_path(path)
+  ,m_pos(0, 0)
 {
 
 }

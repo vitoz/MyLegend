@@ -10,14 +10,12 @@ TileLayer::TileLayer( int width, int height , const std::string rootPath)
   m_height(height),
   m_width(width)
 {
+  //To save each block tileNo
   m_tilesNo = new int[width * height];
-  memset(m_tilesNo, 0, width * height * sizeof(int));
-  CHECK_NEW_MEMORY(m_tilesNo);
   m_pTileSprites = new GameSprite *[width * height];
-  memset(m_pTileSprites, NULL, width * height * sizeof(GameSprite *));
-  CHECK_NEW_MEMORY(m_pTileSprites);
   for(int i = 0; i < width * height; i++)
   {
+    m_tilesNo[i] = 0;
     m_pTileSprites[i] = NULL;
   }
 }
@@ -55,7 +53,6 @@ void TileLayer::loadTile( int x, int y )
   {
     return;
   }
-
   int tileNo = m_tilesNo[y * m_width + x] & 0xffffff;
   int objClass = m_tilesNo[y * m_width + x] >> 24;
 
@@ -66,7 +63,7 @@ void TileLayer::loadTile( int x, int y )
 
   if(m_pTileSprites[y * m_width + x] == NULL)
   {
-    char path[255];
+    char path[MAX_PATH];
     if(objClass)
     {
       sprintf(path, "%s%d\\%06d.bmp", m_rootPath.c_str(), objClass, tileNo);
@@ -76,8 +73,7 @@ void TileLayer::loadTile( int x, int y )
       sprintf(path, "%s\\%06d.bmp", m_rootPath.c_str(), tileNo);
     }
     
-    m_pTileSprites[y * m_width + x] = new GameSprite (path, CCPoint(0, 0));
-    CHECK_NEW_MEMORY(m_pTileSprites[y * m_width + x]);
+    m_pTileSprites[y * m_width + x] = new GameSprite (path);
     GameSprite *pSprite = m_pTileSprites[y * m_width + x];
     if(pSprite->loadTexture())
     {
@@ -99,13 +95,13 @@ void TileLayer::removeTile( int x, int y )
 
 void TileLayer::cleanup()
 {
+  //avoid to cleanup twice
   if(m_pTileSprites == NULL)
   {
     return;
   }
 
   CCLayer::cleanup();
-
   removeAllChildren();
 
   for(int i = 0; i < m_width * m_height; i++)

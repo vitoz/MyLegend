@@ -121,7 +121,8 @@ unsigned char *Util::loadImageData(const char *path, int *pwidth, int *pheight)
       {
         for(int j = 0; j < width; j++)
         {
-          int pos = i * width + j;
+          //int pos = i * width + j;
+          int pos = (height - 1 - i) * width + j;
           int colorIndex = bmp8->colorIndexes[i * alignLineSize + j];
           imageData[pos].r = bmp8->colorTable[colorIndex].b;
           imageData[pos].g = bmp8->colorTable[colorIndex].g;

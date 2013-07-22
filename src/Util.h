@@ -28,12 +28,6 @@
   LOG(__VA_ARGS__);\
   exit(1);
 
-#define  CHECK_NEW_MEMORY(x) \
-  if(x == NULL)\
-  {\
-  ERR_EXIT("no enougn memory.");\
-  }
-
 class Util
 {
 public:

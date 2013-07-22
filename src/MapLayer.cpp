@@ -9,23 +9,11 @@
 USING_NS_CC;
 
 const char *TILE_ROOTPATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic\\tiles";
-const char *STILE_ROOTPATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic\\tiles";
-const char *OBJECT_ROOTPATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic\\tiles";
+const char *STILE_ROOTPATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic\\stiles";
+const char *OBJECT_ROOTPATH = "D:\\project\\cocos2dx\\Debug.win32\\data\\map\\pic\\object";
 
 bool MapLayer::load(const char * path)
 {
-  //   TileLayer *player = new TileLayer(100, 100);
-  //   for(int i = 0; i < 16; i++)
-  //     for(int j = 0; j < 32; j++)
-  //     {
-  //       player->setTile(i, j, "d:/a.bmp");
-  //       player->loadTile(i, j);
-  //     }
-  //     this->addChild(player);
-  //     return false;
-
-  int *p = new int[0x19000000];
-
   setPosition(-4800 , -3200);
 
   if(loadMapFile(path))
@@ -50,20 +38,15 @@ bool MapLayer::loadMapFile( const char *path )
   }
 
   unsigned char *pMapData = new unsigned char[file.size()];
-  CHECK_NEW_MEMORY(pMapData);
 
   file.read(pMapData, file.size());
   width = pMapData[0]+(pMapData[1]<<8);
   height = pMapData[2]+(pMapData[3]<<8);
 
   m_blockFlag = new BlockFlag_t[width * height];
-  CHECK_NEW_MEMORY(m_blockFlag);
   m_tileLayer = new TileLayer(width, height, TILE_ROOTPATH);
-  CHECK_NEW_MEMORY(m_tileLayer);
   m_stileLayer = new TileLayer(width, height, STILE_ROOTPATH);
-  CHECK_NEW_MEMORY(m_stileLayer);
   m_objectLayer = new TileLayer(width, height, OBJECT_ROOTPATH);
-  CHECK_NEW_MEMORY(m_objectLayer);
 
   for (int i = 0; i < width * height; i++)
   {
@@ -99,17 +82,17 @@ bool MapLayer::loadMapFile( const char *path )
 
     if(tileNo >= 0)
     {
-      m_tileLayer->setTile(x, y, tileNo);
+      m_tileLayer->setTile(x, y, tileNo & 0xffffff);
     }
 
     if(stileNo >= 0)
     {
-      m_stileLayer->setTile(x, y, stileNo);
+      m_stileLayer->setTile(x, y, stileNo & 0xffffff);
     }
 
     if(objectNo >= 0)
     {
-      m_objectLayer->setTile(x, y, (objectClassNo << 24) | objectNo);
+      m_objectLayer->setTile(x, y, (objectClassNo << 24) | (objectNo & 0xffffff));
     }
   }
 

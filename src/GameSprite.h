@@ -8,7 +8,7 @@ using std::string;
 class GameSprite : public cocos2d::CCSprite
 {
 public:
-  GameSprite(const string path, const cocos2d::CCPoint &pos);
+  GameSprite(const string path);
   ~GameSprite();
   bool loadTexture();
   void cleanup();
