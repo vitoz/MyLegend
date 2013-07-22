@@ -5,6 +5,8 @@
 
 using namespace cocos2d;
 
+const int TILE_NULL_NO = -1;
+
 TileLayer::TileLayer( int width, int height , const std::string rootPath)
   :m_rootPath(rootPath),
   m_height(height),
@@ -15,7 +17,7 @@ TileLayer::TileLayer( int width, int height , const std::string rootPath)
   m_pTileSprites = new GameSprite *[width * height];
   for(int i = 0; i < width * height; i++)
   {
-    m_tilesNo[i] = 0;
+    m_tilesNo[i] = TILE_NULL_NO;
     m_pTileSprites[i] = NULL;
   }
 }
@@ -53,14 +55,16 @@ void TileLayer::loadTile( int x, int y )
   {
     return;
   }
-  int tileNo = m_tilesNo[y * m_width + x] & 0xffffff;
-  int objClass = m_tilesNo[y * m_width + x] >> 24;
 
-  if(tileNo == 0)
+  int n = m_tilesNo[y * m_width + x];
+
+  if(n == TILE_NULL_NO)
   {
     return;
   }
 
+  int tileNo = n & 0xffffff;
+  int objClass = n >> 24;
   if(m_pTileSprites[y * m_width + x] == NULL)
   {
     char path[MAX_PATH];
@@ -77,20 +81,25 @@ void TileLayer::loadTile( int x, int y )
     GameSprite *pSprite = m_pTileSprites[y * m_width + x];
     if(pSprite->loadTexture())
     {
-      pSprite->setPosition(CCPoint(x * 48, y * 32 - pSprite->getContentSize().height + 32));
+      CCPoint target(x * 48, y * 32);
+      if(objClass)
+      {
+         target.y = target.y - pSprite->getContentSize().height + 32;
+      }
+      pSprite->setPosition(target);
       this->addChild(pSprite);
     }
   }
 }
 
-GameSprite * TileLayer::getTile( int x, int y )
+int TileLayer::getTileNo( int x, int y )
 {
-  return m_pTileSprites[y * m_width + x];
+  return m_tilesNo[y * m_width + x];
 }
 
 void TileLayer::removeTile( int x, int y )
 {
-  m_tilesNo[y * m_width + x] = 0;
+  m_tilesNo[y * m_width + x] = TILE_NULL_NO;
 }
 
 void TileLayer::cleanup()

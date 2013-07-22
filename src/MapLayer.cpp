@@ -101,7 +101,7 @@ bool MapLayer::loadMapFile( const char *path )
   {
     for (int j = 0; j < width-1; j++)
     {
-      if (m_tileLayer->getTile(j, i) != NULL)
+      if (m_tileLayer->getTileNo(j, i) != -1)
       {
         m_tileLayer->removeTile(j + 1, i);
         m_tileLayer->removeTile(j, i + 1);

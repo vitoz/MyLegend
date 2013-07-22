@@ -11,7 +11,7 @@ public:
   TileLayer(int width, int height, const std::string rootPath);
   ~TileLayer();
   void setTile(int x, int y, int no);
-  GameSprite *getTile(int x, int y);
+  int getTileNo(int x, int y);
   void clearTile(int x, int y);
   void removeTile(int x, int y);
   void loadTile(int x, int y);
@@ -22,9 +22,9 @@ protected:
   std::string m_rootPath;
 
 private:
+  int *m_tilesNo;
   int m_width;
   int m_height;
-  int *m_tilesNo;
   GameSprite **m_pTileSprites;
 };
 
