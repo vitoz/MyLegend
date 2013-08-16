@@ -100,24 +100,18 @@
     <ClInclude Include="..\src\TextureCache.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\PlayerSprite.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Role.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ori\source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>ori\source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\cocos2dx_support\LuaCocos2d.cpp">
-      <Filter>ori\source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\cocos2dx_support\CCLuaEngine.cpp">
-      <Filter>ori\source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\cocos2dx_support\Cocos2dxLuaLoader.cpp">
-      <Filter>ori\source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\cocos2dx_support\tolua_fix.c">
       <Filter>ori\source</Filter>
     </ClCompile>
     <ClCompile Include="..\src\MapLayer.cpp">
@@ -144,14 +138,12 @@
     <ClCompile Include="..\src\TextureCache.cpp">
       <Filter>src</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Resources\hello.lua">
-      <Filter>ori</Filter>
-    </None>
-    <None Include="..\Resources\hello2.lua">
-      <Filter>ori</Filter>
-    </None>
+    <ClCompile Include="..\src\PlayerSprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Role.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\Resources\effect1.wav">

@@ -65,7 +65,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pthreadVCE2.lib;libcocos2d.lib;opengl32.lib;glew32.lib;libCocosDenshion.lib;liblua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>pthreadVCE2.lib;libcocos2d.lib;opengl32.lib;glew32.lib;libCocosDenshion.lib;liblua.lib;luaplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -141,7 +141,9 @@
     <ClInclude Include="..\src\GameScene.h" />
     <ClInclude Include="..\src\GameSprite.h" />
     <ClInclude Include="..\src\MapLayer.h" />
+    <ClInclude Include="..\src\PlayerSprite.h" />
     <ClInclude Include="..\src\PlayingScene.h" />
+    <ClInclude Include="..\src\Role.h" />
     <ClInclude Include="..\src\TextureCache.h" />
     <ClInclude Include="..\src\TileLayer.h" />
     <ClInclude Include="..\src\Util.h" />
@@ -151,23 +153,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\cocos2dx_support\CCLuaEngine.cpp" />
-    <ClCompile Include="..\Classes\cocos2dx_support\Cocos2dxLuaLoader.cpp" />
-    <ClCompile Include="..\Classes\cocos2dx_support\LuaCocos2d.cpp" />
-    <ClCompile Include="..\Classes\cocos2dx_support\tolua_fix.c" />
     <ClCompile Include="..\src\GameScene.cpp" />
     <ClCompile Include="..\src\GameSprite.cpp" />
     <ClCompile Include="..\src\MapLayer.cpp" />
+    <ClCompile Include="..\src\PlayerSprite.cpp" />
     <ClCompile Include="..\src\PlayingScene.cpp" />
+    <ClCompile Include="..\src\Role.cpp" />
     <ClCompile Include="..\src\TextureCache.cpp" />
     <ClCompile Include="..\src\TileLayer.cpp" />
     <ClCompile Include="..\src\Util.cpp" />
     <ClCompile Include="..\src\VFile.cpp" />
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Resources\hello.lua" />
-    <None Include="..\Resources\hello2.lua" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\Resources\background.mp3" />
